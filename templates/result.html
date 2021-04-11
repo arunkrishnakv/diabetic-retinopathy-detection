@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link href= "{{ url_for('static',filename='static/css/style.css') }}" rel="stylesheet" type="text/css" />
+	<title>Predictor</title>
+</head>
+<body >
+<header>
+	<img src="{{ path }}" width="200px" height="150px" class="center" alt='webcam_image'>
+	<h2>Detected emotion = No emotion detected </h2>
+	<style>
+		body{
+			background-image: url("../static/noemotion.jpg");
+			height: 100%;
+			width: 100%;
+
+  /* Center and scale the image nicely */
+ 		   background-position: center;
+           background-repeat: no-repeat;
+           background-size: cover;}
+           .center{
+  				display: block;
+  				margin-left: auto;
+  				margin-right: auto;
+  				
+
+		}
+	</style>
+	</style>
+</header>
+</body>
+</html>
