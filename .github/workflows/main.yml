@@ -27,5 +27,5 @@ jobs:
 
       # Runs a single command using the runners shell
       - name: download the image
-        run: curl https://upload.wikimedia.org/wikipedia/en/thumb/4/41/Flag_of_India.svg/1200px-Flag_of_India.svg.png -o app/static/filename
+        run: curl https://upload.wikimedia.org/wikipedia/en/thumb/4/41/Flag_of_India.svg/1200px-Flag_of_India.svg.png -o filename
 
