@@ -31,6 +31,8 @@ jobs:
           curl https://upload.wikimedia.org/wikipedia/en/thumb/4/41/Flag_of_India.svg/1200px-Flag_of_India.svg.png -o filename
           pwd
           ls
+          git config user.email "arunkrishnakv@gmail.com"
+          git config user.username "arunkrishnakv"
           git add .
           git commit -m "file added"
           git push origin master
