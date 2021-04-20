@@ -32,7 +32,7 @@ jobs:
           pwd
           ls
           git config user.email "arunkrishnakv@gmail.com"
-          git config user.username "arunkrishnakv"
+          git config user.name "arunkrishnakv"
           git add .
           git commit -m "file added"
           git push origin master
