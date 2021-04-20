@@ -104,6 +104,8 @@ def upload_file():
    if request.method == 'POST':
       f = request.files.getlist("file")
       path = "/Users/arunkrishna/Documents/project -DR-detection"
+      print(f)
+      results = []
       #f1 = request.files['right_image']
       for i in f:
       	filename = "uploaded"+str(random.randint(1,1000))+".jpeg"
@@ -113,7 +115,8 @@ def upload_file():
       	img = cv2.imread(filename)
       	prediction = predict(img)
       	print(prediction)
-      	return "files uploaded"
+      	results.append(prediction)
+      	return results
       #return render_template("predicted.html", value = "prediction")
       #f1.save(secure_filename(f1.filename))
 
