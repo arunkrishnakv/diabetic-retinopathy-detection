@@ -78,7 +78,7 @@ def predict(img):
 
     model = create_model(input_shape=( height,width, canal), n_out=N_classess)
     # model = load_model('model.h5')
-    model.load_weights('DRmodel.h5')
+    model.load_weights('model.h5')
     prediction = model.predict(tx)
     print(prediction)
     print(np.argmax(prediction))
@@ -103,20 +103,34 @@ def xno():
 def upload_file():
    if request.method == 'POST':
       f = request.files.getlist("file")
-      path = "/Users/arunkrishna/Documents/project -DR-detection"
-      print(f)
+      path = "C:/Users/arunk/Desktop/Edu/fstival"
       results = []
+      img1="";img2="";plot1="";plot2="";
       #f1 = request.files['right_image']
-      for i in f:
-      	filename = "uploaded"+str(random.randint(1,1000))+".jpeg"
-      	print(filename)
-      	i.save(os.path.join(path, filename))
-      	print(i.filename)
-      	img = cv2.imread(filename)
-      	prediction = predict(img)
-      	print(prediction)
-      	results.append(prediction)
-      	return results
+      for i in range(2):
+        file_base = "uploaded"+str(random.randint(1,1000))
+        filename = file_base+".jpeg"
+        print(filename)
+        f[i].save(os.path.join(path, filename))
+        print(f[i].filename)
+        img = cv2.imread(filename)
+        prediction = predict(img)
+        x=predict(img)
+        x=x.flatten()
+        y=[0,1,2,3,4]
+        plot.ylabel('PROBABILITY')
+        plot.xlabel('STAGE')
+        plot.bar(y,x,color='green', edgecolor = 'red')      #actual stage 2
+        plot.show()
+        plot_name = "plot"+file_base+".png"
+        plot.savefig(os.path.join(path, plot_name))
+        if i==0:
+          img1=filename;plot1=plot_name
+        else:
+          img2=filename;plot2=plot_name
+        print(prediction)
+        results.append(prediction)
+      return render_template("dr.html", im1= img1, im2=img2, plt1=plot1, plt2=plot2)
       #return render_template("predicted.html", value = "prediction")
       #f1.save(secure_filename(f1.filename))
 
