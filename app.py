@@ -138,7 +138,7 @@ def upload_file():
         else:
           img2=filename;plot2=plot_name; X.append(img2);X.append(plot2)
         # print(prediction)
-        #plot.show()
+        plot.show()
         results.append(x)
         val.append(pre)
         
