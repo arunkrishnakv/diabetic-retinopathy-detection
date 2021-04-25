@@ -187,7 +187,7 @@ def downloadPdf():
     canvas.drawString(width-(2*inch)-100,500-3*inch-150,"RIGHT EYE STAGE: "+str(val[1]))  
 
     canvas.save()
-    return 'Thank you for Using our system. Please consult with your doctor BEFORE ITS TOO LATE' 
+    return 'Thank you for using our system. Please consult with your doctor BEFORE IT'S TOO LATE' 
    
   
 
