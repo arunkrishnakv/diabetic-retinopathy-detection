@@ -177,14 +177,14 @@ def downloadPdf():
     # print(height)
     canvas.setLineWidth(.3)
     canvas.setFont('Helvetica', 20)
-    canvas.drawString(width/2-50,750,'MEDICAL REPORT')
+    canvas.drawString(width/2-60,750,'MEDICAL REPORT')
 
     canvas.drawImage( path+"static/"+str(X[0]), 50,500, 3*inch,3*inch) 
     canvas.drawImage( path+"static/"+str(X[2]), width-50-(3*inch),500, 3*inch,3*inch) 
     canvas.drawImage( path+"static/"+str(X[1]), 50,500-3*inch-50, 3*inch,3*inch)       
     canvas.drawImage(path+"static/"+str(X[3]), width-50-(3*inch),500-3*inch-50, 3*inch,3*inch) 
     canvas.drawString(100,500-3*inch-150,"LEFT EYE STAGE: "+str(val[0]))
-    canvas.drawString(width-(2*inch)-60,500-3*inch-150,"RIGHT EYE STAGE: "+str(val[1]))  
+    canvas.drawString(width-(2*inch)-100,500-3*inch-150,"RIGHT EYE STAGE: "+str(val[1]))  
 
     canvas.save()
     return 'Thank you for Using our system. Please consult with your doctor BEFORE ITS TOO LATE' 
