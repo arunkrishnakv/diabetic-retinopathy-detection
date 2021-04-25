@@ -1,12 +1,13 @@
 import cv2
 import numpy as np
 import matplotlib.pyplot as plot
+
 from tensorflow.python.keras import backend as k
 from keras import *
 from keras.preprocessing.image import *
 from keras.layers import *
 from keras.callbacks import *
-from flask import Flask,render_template,url_for,request
+from flask import Flask,render_template,url_for,request,make_response
 from keras_preprocessing.image import ImageDataGenerator
 from keras.layers import Dense, Activation, Flatten, Dropout, BatchNormalization
 from keras.layers import Conv2D, MaxPooling2D
@@ -17,7 +18,12 @@ from keras.layers import Conv2D, MaxPooling2D
 from keras import regularizers, optimizers
 import random
 import os
+import pdfkit
+# img1="";img2="";plot1="";plot2="";
+path = ""
 
+X=[]
+val=[]
 def create_model(input_shape, n_out):
     input_tensor = Input(shape=input_shape)
     base_model = applications.ResNet50(weights=None, include_top=False,input_tensor=input_tensor)
@@ -73,6 +79,7 @@ def predict(img):
     tx=circular(img, 20) 
     size = 320
     tx = cv2.resize(tx,(size,size))
+    # imshow(tx)
     tx = np.array([tx]).astype('float')
     tx /= 255.0
 
@@ -82,7 +89,8 @@ def predict(img):
     prediction = model.predict(tx)
     print(prediction)
     print(np.argmax(prediction))
-    return np.argmax(prediction)
+    pred=np.argmax(prediction)
+    return prediction,pred
 
 #predict()
 
@@ -94,52 +102,95 @@ def xno():
   return render_template("test.html")
 
 
-
-# @app.route('/upload')
-# def upload_file():
-#    return render_template('upload.html')
-    
 @app.route('/uploader', methods = ['POST'])
 def upload_file():
    if request.method == 'POST':
       f = request.files.getlist("file")
-      path = "C:/Users/arunk/Desktop/Edu/fstival"
+     
       results = []
-      img1="";img2="";plot1="";plot2="";
+     
+      # img1="";img2="";plot1="";plot2="";
       #f1 = request.files['right_image']
       for i in range(2):
         file_base = "uploaded"+str(random.randint(1,1000))
         filename = file_base+".jpeg"
         print(filename)
-        f[i].save(os.path.join(path, filename))
+        # f[i].save(os.path.join(path,filename))
+        f[i].save(os.path.join(os.path.join(path,"static"), filename))
+       
+       # f[i].save(os.path.join(path, filename))
+
         print(f[i].filename)
-        img = cv2.imread(filename)
-        prediction = predict(img)
-        x=predict(img)
+        img = cv2.imread(os.path.join(os.path.join(path,"static"), filename))
+        # prediction = predict(img)
+        x,pre=predict(img)
         x=x.flatten()
         y=[0,1,2,3,4]
         plot.ylabel('PROBABILITY')
         plot.xlabel('STAGE')
         plot.bar(y,x,color='green', edgecolor = 'red')      #actual stage 2
-        plot.show()
-        plot_name = "plot"+file_base+".png"
-        plot.savefig(os.path.join(path, plot_name))
+        
+        plot_name = "plot"+file_base+".jpeg"
+        plot.savefig(os.path.join(os.path.join(path,"static"), plot_name))
+        plot.savefig(os.path.join(path,plot_name))
         if i==0:
-          img1=filename;plot1=plot_name
+          img1=filename;plot1=plot_name;X.append(img1);X.append(plot1)
         else:
-          img2=filename;plot2=plot_name
-        print(prediction)
-        results.append(prediction)
-      return render_template("dr.html", im1= img1, im2=img2, plt1=plot1, plt2=plot2)
+          img2=filename;plot2=plot_name; X.append(img2);X.append(plot2)
+        # print(prediction)
+        #plot.show()
+        results.append(x)
+        val.append(pre)
+        
+        print(os.path.join(os.path.join(path,"static"), str(img1)))
+      return render_template("dr.html", im1= img1, im2=img2, plt1=plot1, plt2=plot2,res= val)
       #return render_template("predicted.html", value = "prediction")
       #f1.save(secure_filename(f1.filename))
 
       
 
-#@app.route('/')
-#def index():
-#  return render_template("xresult.html",value=i,f=image_to_test,path=pat)
-#app.run(port=80,debug=True)
+@app.route('/download', methods=['GET','POST'])
+def downloadPdf():
+
+
+    import os
+    import pdfkit
+    from PIL import Image
+    from reportlab.lib.enums import TA_JUSTIFY
+    from reportlab.lib.pagesizes import letter, landscape
+    from reportlab.pdfgen import canvas
+
+
+    from reportlab.lib.enums import TA_JUSTIFY
+    from reportlab.lib.pagesizes import letter
+    from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Image
+    from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
+    from reportlab.lib.units import inch
+
+# doc = SimpleDocTemplate("form_letter.pdf",pagesize=landscape(letter),
+#                         rightMargin=72,leftMargin=72,
+#                         topMargin=72,bottomMargin=18)
+
+    canvas = canvas.Canvas("result_1.pdf", pagesize=letter)
+    width,height = letter
+    # print(width)
+    # print(height)
+    canvas.setLineWidth(.3)
+    canvas.setFont('Helvetica', 20)
+    canvas.drawString(width/2-50,750,'MEDICAL REPORT')
+
+    canvas.drawImage( path+"static/"+str(X[0]), 50,500, 3*inch,3*inch) 
+    canvas.drawImage( path+"static/"+str(X[2]), width-50-(3*inch),500, 3*inch,3*inch) 
+    canvas.drawImage( path+"static/"+str(X[1]), 50,500-3*inch-50, 3*inch,3*inch)       
+    canvas.drawImage(path+"static/"+str(X[3]), width-50-(3*inch),500-3*inch-50, 3*inch,3*inch) 
+    canvas.drawString(100,500-3*inch-150,"LEFT EYE STAGE: "+str(val[0]))
+    canvas.drawString(width-(2*inch)-60,500-3*inch-150,"RIGHT EYE STAGE: "+str(val[1]))  
+
+    canvas.save()
+    return 'Thank you for Using our system. Please consult with your doctor BEFORE ITS TOO LATE' 
+   
+  
+
 app.run(port=5677,debug=False, threaded=False)
 
 

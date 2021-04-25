@@ -4,18 +4,23 @@
 <link href= "{{ url_for('static',filename='static/css/style.css') }}" rel="stylesheet" type="text/css" />
 	<title>Predictor</title>
 </head>
-<body >
-	
-	<h2>Predicted DR stage</h2>
-	<img src="stage1.jpeg" width="200px" height="150px" alt='img1'>
-	<img src="{{ im2 }}" width="200px" height="150px" alt='img2'>
-	<img src="{{ plt1 }}"width="200px" height="150px" alt='plot1'>
-	<img src="{{ plt2 }}" width="200px" height="150px" alt='plot2'>
+<body  style="background-color:powderblue;" >
 
-	<style>
-		body{
-		}
-	</style>
-	</style>
+	<div align="center">
+	<h2><b>RESULT</b></h2>
+	<h3> <b>LEFT EYE &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp RIGHT EYE </b></h3>
+	<img src="{{ url_for('static',filename=im1 )}}" width="200px" height="150px" alt='img1'>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+	<img src="{{ url_for('static',filename=im2 )}}" width="200px" height="150px" alt='img2'><br><br><br>
+	<img src="{{ url_for('static',filename=plt1 )}}"width="200px" height="150px" alt='plot1'>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+	<img src="{{ url_for('static',filename=plt2)}}" width="200px" height="150px" alt='plot2'><br><br>
+
+	<p>STAGE: {{res[0]}} &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp STAGE: {{res[1]}}</p>
+	<p> </p>
+
+	<form action="/download" method="GET">
+
+		<input type="submit" value="DOWNLOAD PDF" id="download_button"/>
+	</form>
+</div>
 </body>
 </html>
