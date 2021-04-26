@@ -19,6 +19,20 @@ from keras import regularizers, optimizers
 import random
 import os
 import pdfkit
+import os
+import pdfkit
+from PIL import Image
+from reportlab.lib.enums import TA_JUSTIFY
+from reportlab.lib.pagesizes import letter, landscape
+from reportlab.pdfgen import canvas
+from reportlab.lib.enums import TA_JUSTIFY
+from reportlab.lib.pagesizes import letter
+from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Image
+from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
+from reportlab.lib.units import inch
+from io import BytesIO
+from flask import send_from_directory
+
 # img1="";img2="";plot1="";plot2="";dgsdg
 path = ""
 
@@ -157,29 +171,7 @@ def upload_file():
 
 @app.route('/download', methods=['GET','POST'])
 def downloadPdf():
-
-
-    import os
-    import pdfkit
-    from PIL import Image
-    from reportlab.lib.enums import TA_JUSTIFY
-    from reportlab.lib.pagesizes import letter, landscape
-    from reportlab.pdfgen import canvas
-
-
-    from reportlab.lib.enums import TA_JUSTIFY
-    from reportlab.lib.pagesizes import letter
-    from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Image
-    from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
-    from reportlab.lib.units import inch
-
-# doc = SimpleDocTemplate("form_letter.pdf",pagesize=landscape(letter),
-#                         rightMargin=72,leftMargin=72,
-#                         topMargin=72,bottomMargin=18)
-
-   from io import BytesIO
     output=BytesIO()
-    
     canvas = canvas.Canvas(output, pagesize=letter)
     width,height = letter
     # print(width)
@@ -203,7 +195,6 @@ def downloadPdf():
     response.headers['Content-Disposition'] = "attachment; filename='REPORT1.pdf"
     response.mimetype = 'application/pdf'
     return response
-from flask import send_from_directory
 
 @app.route('/favicon.ico')
 def favicon():
