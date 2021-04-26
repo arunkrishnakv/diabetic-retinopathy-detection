@@ -2,7 +2,6 @@
 import numpy as np
 import matplotlib.pyplot as plot
 
-from tensorflow.python.keras import backend as k
 from keras import *
 from keras.preprocessing.image import *
 from keras.layers import *
