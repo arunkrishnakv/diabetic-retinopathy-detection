@@ -207,4 +207,4 @@ def downloadPdf():
    
   
 
-app.run(port=5677,debug=False, threaded=False)
+app.run(host="0.0.0.0",debug=False, threaded=False)
