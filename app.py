@@ -177,7 +177,10 @@ def downloadPdf():
 #                         rightMargin=72,leftMargin=72,
 #                         topMargin=72,bottomMargin=18)
 
-    canvas = canvas.Canvas("result_1.pdf", pagesize=letter)
+   from io import BytesIO
+    output=BytesIO()
+    
+    canvas = canvas.Canvas(output, pagesize=letter)
     width,height = letter
     # print(width)
     # print(height)
@@ -193,7 +196,13 @@ def downloadPdf():
     canvas.drawString(width-(2*inch)-100,500-3*inch-150,"RIGHT EYE STAGE: "+str(val[1]))  
 
     canvas.save()
-    return 'Thank you for using our system. Please consult with your doctor BEFORE IT'S TOO LATE' 
+    pdf_out = output.getvalue()
+    output.close()
+
+    response = make_response(pdf_out)
+    response.headers['Content-Disposition'] = "attachment; filename='REPORT1.pdf"
+    response.mimetype = 'application/pdf'
+    return response
    
   
 
