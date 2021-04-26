@@ -200,7 +200,10 @@ def favicon():
     return send_from_directory(os.path.join(app.root_path, 'static'),
                           'favicon.ico',mimetype='image/vnd.microsoft.icon')
   #comment
-if __name__ == '__main__':
+if __name__ == "__main__":
+    print(("* Loading Keras model and Flask starting server..."
+           "please wait until server has fully started"))
+    # Run app
     app.run(host="0.0.0.0", port=8000)
 
 
