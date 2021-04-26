@@ -2,7 +2,7 @@ import cv2
 import numpy as np
 import matplotlib.pyplot as plot
 
-from keras.applications.resnet50 import ResNet50
+from tensorflow.python.keras import backend as k
 from keras import *
 from keras.preprocessing.image import *
 from keras.layers import *
@@ -40,8 +40,8 @@ X=[]
 val=[]
 def create_model(input_shape, n_out):
     input_tensor = Input(shape=input_shape)
-    base_model = ResNet50(weights=None, include_top=False,input_tensor=input_tensor)
-    base_model.load_weights('resnet50_weights_tf_dim_ordering_tf_kernels_notop.h5')
+    base_model = applications.ResNet50(weights=None, include_top=False,input_tensor=input_tensor)
+    base_model.load_weights(os.path.join(path, 'resnet50_weights_tf_dim_ordering_tf_kernels_notop.h5'))
 
     x = GlobalAveragePooling2D()(base_model.output)
     x = Dropout(0.5)(x)
@@ -99,7 +99,8 @@ def predict(img):
 
     model = create_model(input_shape=( height,width, canal), n_out=N_classess)
     # model = load_model('model.h5')
-    model.load_weights('model.h5')
+    
+    model.load_weights(os.path.join(path, 'model.h5'))
     prediction = model.predict(tx)
     print(prediction)
     print(np.argmax(prediction))
