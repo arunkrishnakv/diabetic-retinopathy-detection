@@ -97,7 +97,6 @@ def predict(img):
 app = Flask(__name__)
 
 @app.route('/')
-
 def xno():
   return render_template("test.html")
 
