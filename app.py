@@ -8,7 +8,6 @@ from keras.preprocessing.image import *
 from keras.layers import *
 from keras.callbacks import *
 from flask import Flask,render_template,url_for,request,make_response,Response
-from flask_http_response import success, result, error
 from keras_preprocessing.image import ImageDataGenerator
 from keras.layers import Dense, Activation, Flatten, Dropout, BatchNormalization
 from keras.layers import Conv2D, MaxPooling2D
