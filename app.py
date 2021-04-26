@@ -19,7 +19,7 @@ from keras import regularizers, optimizers
 import random
 import os
 import pdfkit
-# img1="";img2="";plot1="";plot2="";
+# img1="";img2="";plot1="";plot2="";dgsdg
 path = ""
 
 X=[]
