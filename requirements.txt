@@ -7,7 +7,7 @@ Keras-Applications==1.0.8
 Keras-Preprocessing==1.1.2
 matplotlib==3.0.0
 numpy==1.19.5
-opencv-python==4.5.1.48
+opencv-python
 pdfkit==0.6.1
 reportlab==3.5.67
 requests==2.25.1
