@@ -211,7 +211,7 @@ def favicon():
                           'favicon.ico',mimetype='image/vnd.microsoft.icon')
   #comment
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=False, threaded = False)
 
 
 
