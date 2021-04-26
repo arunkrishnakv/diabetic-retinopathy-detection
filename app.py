@@ -2,12 +2,11 @@ import cv2
 import numpy as np
 import matplotlib.pyplot as plot
 
-from tensorflow import tensorflow.keras.applications
+from tensorflow.keras.applications.resnet50 import ResNet50
 from keras import *
 from keras.preprocessing.image import *
 from keras.layers import *
 from keras.callbacks import *
-from keras.applications.resnet50 import ResNet50
 from flask import Flask,render_template,url_for,request,make_response
 from keras_preprocessing.image import ImageDataGenerator
 from keras.layers import Dense, Activation, Flatten, Dropout, BatchNormalization
