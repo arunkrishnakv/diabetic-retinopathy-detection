@@ -5,7 +5,7 @@ Jinja2==2.10
 Keras==2.3.0
 Keras-Applications==1.0.8
 Keras-Preprocessing==1.1.2
-matplotlib==3.4.1
+matplotlib==3.0.0
 numpy==1.19.5
 opencv-python==4.5.1.48
 pdfkit==0.6.1
