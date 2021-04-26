@@ -2,7 +2,7 @@ import cv2
 import numpy as np
 import matplotlib.pyplot as plot
 
-from tensorflow.keras.applications.resnet50 import ResNet50
+from keras.applications.resnet50 import ResNet50
 from keras import *
 from keras.preprocessing.image import *
 from keras.layers import *
