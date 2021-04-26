@@ -12,4 +12,4 @@ pdfkit==0.6.1
 reportlab==3.5.67
 requests==2.25.1
 scikit-learn==0.19.1
-tensorflow==2.4.1
+tensorflow==1.14.0
