@@ -49,7 +49,6 @@ def create_model(input_shape, n_out):
     x = Dropout(0.5)(x)
     final_output = Dense(n_out, activation='softmax', name='final_output')(x)
     model = Model(input_tensor, final_output)
-    base_model.close()
     return model
 
 def circular(img,sigmax):
