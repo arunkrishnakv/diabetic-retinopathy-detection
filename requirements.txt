@@ -4,6 +4,7 @@ google-auth==1.28.0
 google-auth-oauthlib==0.4.3
 google-pasta==0.2.0
 h5py==2.10.0
+hdf5plugin
 Jinja2==2.10
 Keras==2.3.0
 Keras-Applications==1.0.8
