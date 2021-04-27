@@ -41,7 +41,7 @@ val=[]
 def create_model(input_shape, n_out):
     input_tensor = Input(shape=input_shape)
     base_model = applications.ResNet50(weights=None, include_top=False,input_tensor=input_tensor)
-    base_model.load_weights((os.path.join(path,'resnet50_weights_tf_dim_ordering_tf_kernels_notop.h5'))
+    base_model.load_weights(os.path.join(path,'resnet50_weights_tf_dim_ordering_tf_kernels_notop.h5'))
 
     x = GlobalAveragePooling2D()(base_model.output)
     x = Dropout(0.5)(x)
