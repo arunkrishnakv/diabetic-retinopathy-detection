@@ -35,14 +35,9 @@ from flask import send_from_directory
 
 # img1="";img2="";plot1="";plot2="";dgsdg
 path = ""
-
 X=[]
 val=[]
-canal =3
-height=width=320
-N_classess=5
-model = create_model(input_shape=( height,width, canal), n_out=N_classess)
-model.load_weights('model.h5')
+
 
 def create_model(input_shape, n_out):
     input_tensor = Input(shape=input_shape)
@@ -56,6 +51,13 @@ def create_model(input_shape, n_out):
     final_output = Dense(n_out, activation='softmax', name='final_output')(x)
     model = Model(input_tensor, final_output)
     return model
+
+
+canal =3
+height=width=320
+N_classess=5
+model = create_model(input_shape=( height,width, canal), n_out=N_classess)
+model.load_weights('model.h5')
 
 def circular(img,sigmax):
     img=crop(img)
