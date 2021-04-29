@@ -108,8 +108,8 @@ def predict(img):
     #model = create_model(input_shape=( height,width, canal), n_out=N_classess)
     # model = load_model('model.h5')
 #    model.load_weights('model.h5')
-    global model
-    prediction = model.predict(tx)
+    model1 = global model
+    prediction = model1.predict(tx)
     print(prediction)
     print(np.argmax(prediction))
     pred=np.argmax(prediction)
