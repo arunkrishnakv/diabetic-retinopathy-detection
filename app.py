@@ -108,12 +108,12 @@ def predict(img):
     #model = create_model(input_shape=( height,width, canal), n_out=N_classess)
     # model = load_model('model.h5')
 #    model.load_weights('model.h5')
-    model1 = global model
-    prediction = model1.predict(tx)
+    global model
+    prediction = model.predict(tx)
     print(prediction)
     print(np.argmax(prediction))
     pred=np.argmax(prediction)
-    model.close()
+    #model.close()
     return prediction,pred
 
 #predict()
@@ -171,6 +171,8 @@ def upload_file():
         # plot_name=""
         results.append(x)
         val.append(pre)
+        global model
+        model.close()
         
         print(os.path.join(os.path.join(path,"static"), str(img1)))
       return render_template("dr.html", im1= img1, im2=img2, plt1=plot1, plt2=plot2,res= val)
