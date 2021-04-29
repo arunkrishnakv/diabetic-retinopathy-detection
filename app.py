@@ -38,6 +38,12 @@ path = ""
 
 X=[]
 val=[]
+canal =3
+height=width=320
+N_classess=5
+model = create_model(input_shape=( height,width, canal), n_out=N_classess)
+model.load_weights('model.h5')
+
 def create_model(input_shape, n_out):
     input_tensor = Input(shape=input_shape)
     base_model = applications.ResNet50(weights=None, include_top=False,input_tensor=input_tensor)
@@ -86,9 +92,9 @@ def crop(img,tolerance=7):
     return img
 
 def predict(img):
-    canal =3
-    height=width=320
-    N_classess=5
+    #canal =3
+    #height=width=320
+    #N_classess=5
    # tx = cv2.imread('stage2.jpeg')
     tx=circular(img, 20) 
     size = 320
@@ -97,9 +103,9 @@ def predict(img):
     tx = np.array([tx]).astype('float')
     tx /= 255.0
 
-    model = create_model(input_shape=( height,width, canal), n_out=N_classess)
+    #model = create_model(input_shape=( height,width, canal), n_out=N_classess)
     # model = load_model('model.h5')
-    model.load_weights('model.h5')
+#    model.load_weights('model.h5')
     prediction = model.predict(tx)
     print(prediction)
     print(np.argmax(prediction))
