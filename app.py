@@ -33,13 +33,14 @@ from reportlab.lib.units import inch
 from io import BytesIO
 from reportlab.pdfgen import canvas
 from flask import send_from_directory
+import keras
 
 # img1="";img2="";plot1="";plot2="";dgsdg
 path = ""
 X=[]
 val=[]
 
-
+keras.backend.clear_session()
 def create_model(input_shape, n_out):
     input_tensor = Input(shape=input_shape)
     base_model = applications.ResNet50(weights=None, include_top=False,input_tensor=input_tensor)
