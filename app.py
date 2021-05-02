@@ -109,7 +109,7 @@ def predict(img):
 
     #model = create_model(input_shape=( height,width, canal), n_out=N_classess)
     # model = load_model('model.h5')
-#    model.load_weights('model.h5')
+#    model.load_weights('model.h5')new comment
     global model
     prediction = model.predict(tx)
     print(prediction)
@@ -163,7 +163,7 @@ def upload_file():
           img1=filename;plot1=plot_name;X.append(img1);X.append(plot1)
         else:
           img2=filename;plot2=plot_name; X.append(img2);X.append(plot2)
-        # print(prediction)
+        # print(prediction) added comment
         plot.close()
         ab=plot.show()
         plot.close()
